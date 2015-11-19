@@ -1,5 +1,6 @@
 package com.example.jayjun.sunshine;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -80,7 +81,8 @@ public class MainActivityFragment extends Fragment {
 
                 String forecast = mForecastAdapter.getItem(position);
 
-                Toast.makeText(getContext(), forecast, Toast.LENGTH_LONG ).show();
+                Intent detailedViewIntent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
+                startActivity(detailedViewIntent);
             }
         });
 
