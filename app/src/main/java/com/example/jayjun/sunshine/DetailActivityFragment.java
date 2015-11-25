@@ -27,6 +27,8 @@ public class DetailActivityFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         String txt = intent.getStringExtra(Intent.EXTRA_TEXT);
 
+
+
         weatherText.setText(txt);
 
         return fragmentView;

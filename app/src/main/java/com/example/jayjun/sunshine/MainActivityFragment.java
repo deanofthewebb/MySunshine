@@ -1,9 +1,11 @@
 package com.example.jayjun.sunshine;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
@@ -52,6 +54,12 @@ public class MainActivityFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        updateWeather();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -69,8 +77,12 @@ public class MainActivityFragment extends Fragment {
 
         List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
 
+        //mForecastAdapter =
+        //        new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, weekForecast);
+
         mForecastAdapter =
-                new ArrayAdapter<String>(getContext(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, weekForecast);
+                new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, new ArrayList<String>());
+
 
         ListView forecastLV = (ListView) rootView.findViewById(R.id.list_view_forecast);
         forecastLV.setAdapter(mForecastAdapter);
@@ -113,13 +125,18 @@ public class MainActivityFragment extends Fragment {
     void updateWeather() {
         Log.i(LOG_TAG, "Now In the updateWeather~~~");
         FetchWeatherTask weatherTask = new FetchWeatherTask();
-        weatherTask.execute();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+        Log.i(LOG_TAG, location);
+
+        weatherTask.execute(location);
     }
 
     public class FetchWeatherTask extends AsyncTask<String, String, String[]> {
 
         @Override
-        protected String[] doInBackground(String... params) {
+        protected String[] doInBackground(String... locations) {
 
             ArrayList<String> weatherInfoArray = new ArrayList<String>();
 
@@ -134,7 +151,10 @@ public class MainActivityFragment extends Fragment {
             // Will contain the raw JSON response as a string.
             String forecastJsonStr = null;
 
-            String locationQuery = "94043";
+            //String locationQuery = "94043";
+            String locationQuery = locations[0];
+            Log.i(LOG_TAG, "locationQuery");
+
             String format = "json";
             String units = "metric";
             String daycnt = "7";
