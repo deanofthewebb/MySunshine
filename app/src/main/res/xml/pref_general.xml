@@ -10,7 +10,10 @@
         android:inputType="text"
         android:singleLine="true"/>
 
-
-
-
+    <ListPreference
+        android:title="@string/pref_pickunits_label"
+        android:key="@string/pref_pickunits_key"
+        android:defaultValue="@string/pref_pickunits_list_item_metric_value"
+        android:entries="@array/pref_pickunits_entries"
+        android:entryValues="@array/pref_pickunits_entry_values" />
 </PreferenceScreen>

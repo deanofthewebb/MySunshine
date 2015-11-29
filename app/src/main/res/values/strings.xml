@@ -9,4 +9,14 @@
     <string name="pref_location_label">Location</string>
     <string name="pref_location_key" translatetable="false">location</string>
     <string name="pref_location_default" translatetable="false">94043</string>
+
+    <string name="pref_pickunits_label">Pick Units</string>
+    <string name="pref_pickunits_key">pickunits</string>
+
+    <string name="pref_pickunits_list_item_metric">Metric</string>
+    <string name="pref_pickunits_list_item_imperial">Imperial</string>
+
+    <string name="pref_pickunits_list_item_metric_value">metric</string>
+    <string name="pref_pickunits_list_item_imperial_value">imperial</string>
+
 </resources>

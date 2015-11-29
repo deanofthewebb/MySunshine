@@ -31,8 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -64,7 +62,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
+/*
         String[] forecastArray = {
                 "Today - Sunny - 88/63",
                 "Tomorrow - Foggy - 70/46",
@@ -76,7 +74,7 @@ public class MainActivityFragment extends Fragment {
         };
 
         List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
-
+*/
         //mForecastAdapter =
         //        new ArrayAdapter<String>(getActivity(), R.layout.list_item_forecast, R.id.list_item_forecast_textview, weekForecast);
 
@@ -280,6 +278,16 @@ public class MainActivityFragment extends Fragment {
          * Prepare the weather high/lows for presentation.
          */
         private String formatHighLows(double high, double low) {
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String unit = prefs.getString(getString(R.string.pref_pickunits_key), getString(R.string.pref_pickunits_list_item_metric_value));
+            Log.i(LOG_TAG, unit);
+
+            if(unit.equals(getString(R.string.pref_pickunits_list_item_imperial_value))) {
+                high = (high * 1.8) + 32;
+                low = (low * 1.8) + 32;
+            }
+
             // For presentation, assume the user doesn't care about tenths of a degree.
             long roundedHigh = Math.round(high);
             long roundedLow = Math.round(low);

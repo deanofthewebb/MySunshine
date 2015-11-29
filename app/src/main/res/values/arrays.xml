@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="pref_pickunits_entries">
+        <item>@string/pref_pickunits_list_item_metric</item>
+        <item>@string/pref_pickunits_list_item_imperial</item>
+    </string-array>
+    <string-array name="pref_pickunits_entry_values">
+        <item>@string/pref_pickunits_list_item_metric_value</item>
+        <item>@string/pref_pickunits_list_item_imperial_value</item>
+    </string-array>
+
+</resources>
