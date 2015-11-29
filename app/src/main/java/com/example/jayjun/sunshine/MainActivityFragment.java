@@ -115,6 +115,9 @@ public class MainActivityFragment extends Fragment {
         if(id == R.id.action_refresh) {
             updateWeather();
             return true;
+        }else if(id == R.id.action_map) {
+            openPreferredLocationInMap();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -371,6 +374,19 @@ public class MainActivityFragment extends Fragment {
             }
             return resultStrs;
 
+        }
+    }
+
+    private void openPreferredLocationInMap() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
+
+        Uri geoLocation = Uri.parse("geo:0.0?").buildUpon().appendQueryParameter("q", location).build();
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 

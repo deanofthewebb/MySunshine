@@ -19,4 +19,5 @@
     <string name="pref_pickunits_list_item_metric_value">metric</string>
     <string name="pref_pickunits_list_item_imperial_value">imperial</string>
 
+    <string name="action_map">Map Location</string>
 </resources>
